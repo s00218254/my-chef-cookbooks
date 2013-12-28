@@ -1,0 +1,62 @@
+[DEFAULT]
+root_helper = sudo /usr/bin/neutron-rootwrap /etc/neutron/rootwrap.conf
+debug = <%= @neutron_debug %>
+verbose = <%= @neutron_verbose %>
+bind_host = <%= @neutron_ipaddress %>
+bind_port = <%= @neutron_port %>
+<% if @neutron_plugin == "ovs" %>
+core_plugin = neutron.plugins.openvswitch.ovs_neutron_plugin.OVSNeutronPluginV2
+ovs_use_veth = <%= @neutron_ovs_use_veth %>
+<% end %>
+
+<% if @neutron_plugin == "ml2" %>
+core_plugin = neutron.plugins.ml2.plugin.Ml2Plugin
+service_plugins = neutron.services.l3_router.l3_router_plugin.L3RouterPlugin,neutron.services.vpn.plugin.VPNDriverPlugin,neutron.services.loadbalancer.plugin.LoadBalancerPlugin,neutron.services.firewall.fwaas_plugin.FirewallPlugin
+<% end %>
+
+allow_overlapping_ips = <%= @overlapping_ips %>
+use_namespaces = <%= @neutron_namespace %>
+api_paste_config = /etc/neutron/api-paste.ini
+control_exchange = neutron
+rabbit_host = <%= @rabbit_ipaddress %>
+rabbit_ha_queues=<%= @rabbit_ha_queues %>
+notification_driver = neutron.openstack.common.notifier.rpc_notifier
+#rpc_backend=neutron.openstack.common.rpc.impl_kombu
+
+# keystone auth - this will cascade to all agents/services
+auth_strategy = keystone
+auth_url = <%= @keystone_protocol %>://<%= @keystone_api_ipaddress %>:<%= @keystone_admin_port %><%= @keystone_path %>
+auth_region = RegionOne
+admin_tenant_name = <%= @service_tenant_name %>
+admin_user = <%= @service_user %>
+admin_password = <%= @service_pass %>
+
+# for now, these both need to be set to the same value
+dhcp_lease_time = <%= @dhcp_lease_time %>
+dhcp_lease_duration = <%= @dhcp_lease_time %>
+
+# Seconds elapsed until an agent is considered down
+agent_down_time = <%= @agent_down_time %>
+
+<% if @neutron_plugin == "ml2" %>
+[service_providers]
+service_provider=LOADBALANCER:Haproxy:neutron.services.loadbalancer.drivers.haproxy.plugin_driver.HaproxyOnHostPluginDriver:default
+<% end %>
+
+[AGENT]
+root_helper = sudo /usr/bin/neutron-rootwrap /etc/neutron/rootwrap.conf
+polling_interval = 2
+
+[QUOTAS]
+# resource name(s) that are supported in quota features
+quota_items = <%= @quota_items %>
+# default number of resource allowed per tenant, minus for unlimited
+default_quota = <%= @default_quota %>
+# number of networks allowed per tenant, and minus means unlimited
+quota_network = <%= @quota_network %>
+# number of subnets allowed per tenant, and minus means unlimited
+quota_subnet = <%= @quota_subnet %>
+# number of ports allowed per tenant, and minus means unlimited
+quota_port = <%= @quota_port %>
+# default driver to use for quota checks
+quota_driver = <%= @quota_driver %>

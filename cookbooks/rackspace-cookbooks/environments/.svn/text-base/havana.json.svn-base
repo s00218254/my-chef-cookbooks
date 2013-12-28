@@ -1,0 +1,95 @@
+{
+  "name": "havana",
+  "description": "Chef-server havana environment",
+  "cookbook_versions": {
+  },
+  "json_class": "Chef::Environment",
+  "chef_type": "environment",
+  "default_attributes": {
+  },
+  "override_attributes": {
+    "developer_mode": true,
+    "monitoring" : {
+      "metric_provider" : "collectd",
+      "procmon_provider" : "monit"
+    },
+    "glance": {
+      "image_upload": false,
+      "images": ["cirros", "precise"],
+	  "service_pass": "Galax8800",
+	  "api":{
+	    "default_store": "swift",
+		"swift": {
+		  "store_container": "glance-test"
+		},
+		"swift_store_auth_address": "172.25.7.16",
+		"swift_store_key": "Galax8800"
+	  }
+    },
+    "nova": {
+      "ratelimit" : {
+        "api" : { "enabled" : true },
+        "volume" : { "enabled" : true }
+      },
+      "libvirt": { "virt_type": "qemu" },
+	  "service_pass": "Galax8800"
+    },
+	"cinder": {
+	  "service_pass": "Galax8800"
+	},
+    "mysql": {
+      "allow_remote_root": true,
+      "root_network_acl": "%",
+      "server_root_password": "Galax8800",
+	  "bind_address": "172.25.100.243"
+    },
+	"rabbitmq": {
+	  "bind_address": "172.25.100.244"
+	},
+    "neutron": {
+	    "service_pass": "Galax8800",
+	    "plugin": "ml2",
+		"ml2": {
+		  "type_drivers": "vlan,gre,vxlan",
+		  "mechanism_drivers": "openvswitch,linuxbridge",
+		  "tenant_network_types": "vlan,gre,vxlan",
+		  "network_vlan_ranges": "51:99",
+		  "tunnel_id_ranges": "1:1000",
+		  "vni_ranges": "1001:2000",
+		  "vxlan_group": "239.1.1.1"
+		},
+        "ovs": {
+          "network_type": "vlan",
+          "tunnel_ranges": "1:1000",
+          "vlan_ranges": "51:99",
+          "data_interface": "eth1",
+          "external_interface": "eth2"
+       },
+	   "bridge": {
+	      "vlan_ranges": "51:99",
+          "data_interface": "eth1"
+	   }
+    },
+    "keystone": {
+      "admin_passwd": "Galax8800"
+    },
+	"ntp": {
+	  "change_ntpserver": true,
+	  "ntp_servers": ["172.30.254.2"]
+	},
+    "osops_networks": {
+      "nova": "172.25.0.0/16",
+      "public": "172.25.0.0/16",
+      "management": "172.25.0.0/16"
+    },
+    "osops": {
+	   "change_sources": true,
+       "apt_repository": {
+          "osops-packages": "http://172.30.254.2/ppa.launchpad.net/osops-packaging/ppa/ubuntu/",
+          "openstack": "http://172.30.254.2/ubuntu-cloud/ubuntu/",
+          "havana-proposed-ppa": "http://172.30.254.2/ppa.launchpad.net/ubuntu-cloud-archive/havana-staging/ubuntu/"
+       }
+    },
+    "package_component": "havana"
+  }
+}

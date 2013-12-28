@@ -1,0 +1,246 @@
+10
+
+dir
+2946
+svn://10.144.11.43/OpenStack/8.Deployment/chef%E9%83%A8%E7%BD%B2/rackspace-cookbooks-havana/cookbooks
+svn://10.144.11.43
+
+
+
+2013-12-11T08:12:42.819687Z
+2945
+
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+6c1b1eec-a20c-e545-bb8f-c2dcf19fe457
+
+apt
+dir
+
+rabbitmq-openstack
+dir
+
+ceilometer
+dir
+
+collectd
+dir
+
+glance
+dir
+
+collectd-graphite
+dir
+
+nova-network
+dir
+
+memcached-openstack
+dir
+
+README.md
+file
+
+
+
+
+2013-10-09T07:00:30.000000Z
+ba662a4436a2be41652e0bcc410ab69e
+2013-10-11T07:39:53.729801Z
+2776
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3064
+
+swift
+dir
+
+sources-list
+dir
+
+kong
+dir
+
+sosreport
+dir
+
+xfs
+dir
+
+rabbitmq
+dir
+
+ntp
+dir
+
+osops-utils
+dir
+
+iptables
+dir
+
+graphite
+dir
+
+apache2
+dir
+
+postgresql
+dir
+
+database
+dir
+
+memcached
+dir
+
+erlang
+dir
+
+modules
+dir
+
+openstack-logging
+dir
+
+openstack-ha
+dir
+
+dsh
+dir
+
+openssh
+dir
+
+sysctl
+dir
+
+openssl
+dir
+
+build-essential
+dir
+
+monitoring
+dir
+
+monit
+dir
+
+selinux
+dir
+
+horizon
+dir
+
+exerstack
+dir
+
+aws
+dir
+
+haproxy
+dir
+
+mysql-openstack
+dir
+
+hardware
+dir
+
+keystone
+dir
+
+runit
+dir
+
+rsyslog
+dir
+
+nova
+dir
+
+cinder
+dir
+
+mysql
+dir
+
+collectd-plugins
+dir
+
+chefignore
+file
+
+
+
+
+2013-10-09T07:00:30.000000Z
+564afd93efb47cb3ee93b5fdfdb1fa39
+2013-10-11T07:39:53.729801Z
+2776
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+12
+
+keepalived
+dir
+
+openstack-monitoring
+dir
+
+yum
+dir
+

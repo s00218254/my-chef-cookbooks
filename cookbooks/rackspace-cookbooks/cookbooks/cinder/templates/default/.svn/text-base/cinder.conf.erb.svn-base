@@ -1,0 +1,26 @@
+[DEFAULT]
+rootwrap_config = /etc/cinder/rootwrap.conf
+api_paste_confg = /etc/cinder/api-paste.ini
+iscsi_helper = tgtadm
+volume_name_template = volume-%s
+verbose = True
+debug = True
+auth_strategy = keystone
+state_path = /var/lib/cinder
+sql_connection = mysql://<%= @db_user %>:<%= @db_password %>@<%= @db_ip_address %>/<%= @db_name %>
+rabbit_host = <%= @rabbit_ipaddress %>
+rabbit_port = <%= @rabbit_port %>
+rabbit_ha_queues = <%= @rabbit_ha_queues %>
+osapi_volume_listen = <%= @cinder_api_listen_ip %>
+osapi_volume_listen_port = <%= @cinder_api_listen_port %>
+iscsi_ip_address = <%= @iscsi_ip_address %>
+storage_availability_zone = <%= @storage_availability_zone %>
+max_gigabytes = <%= @max_gigabytes %>
+glance_host = <%= @glance_host %>
+notification_driver=cinder.openstack.common.notifier.rpc_notifier
+
+#### STORAGE PROVIDER INFORMATION ####
+<%= render "partials/storage-options.partial.erb" %>
+
+[keystone_authtoken]
+signing_dirname = /tmp/keystone-signing-cinder

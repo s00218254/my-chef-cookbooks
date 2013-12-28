@@ -1,0 +1,45 @@
+[ml2]
+type_drivers = <%= @ml2_type_drivers %>
+mechanism_drivers = <%= @ml2_mechanism_drivers %>
+tenant_network_types = <%= @ml2_tenant_network_types %>
+
+[ml2_type_vlan]
+# (ListOpt) List of <physical_network>[:<vlan_min>:<vlan_max>] tuples
+# specifying physical_network names usable for VLAN provider and
+# tenant networks, as well as ranges of VLAN tags on each
+# physical_network available for allocation as tenant networks.
+#
+# network_vlan_ranges =
+network_vlan_ranges = physnet:<%= @ml2_network_vlan_ranges %>
+
+[ml2_type_gre]
+# (ListOpt) Comma-separated list of <tun_min>:<tun_max> tuples enumerating ranges of GRE tunnel IDs that are available for tenant network allocation
+# tunnel_id_ranges =
+tunnel_id_ranges = <%= @ml2_tunnel_id_ranges %>
+
+[ml2_type_vxlan]
+# (ListOpt) Comma-separated list of <vni_min>:<vni_max> tuples enumerating
+# ranges of VXLAN VNI IDs that are available for tenant network allocation.
+#
+# vni_ranges =
+vni_ranges = <%= @ml2_vni_ranges %>
+
+# (StrOpt) Multicast group for the VXLAN interface. When configured, will
+# enable sending all broadcast traffic to this multicast group. When left
+# unconfigured, will disable multicast VXLAN mode.
+#
+# vxlan_group =
+# Example: vxlan_group = 239.1.1.1
+vxlan_group =<%= @ml2_vxlan_group %>
+
+[DATABASE]
+sql_connection = mysql://<%= @db_user %>:<%= @db_password %>@<%= @db_ip_address %>/<%= @db_name %>
+reconnect_interval = 2
+
+[SECURITYGROUP]
+firewall_driver = <%= @ml2_firewall_driver %>
+
+[AGENT]
+state_path = /var/run/neutron
+debug = <%= @ml2_debug %>
+verbose = <%= @ml2_verbose %>
