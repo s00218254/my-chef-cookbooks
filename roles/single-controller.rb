@@ -27,3 +27,4 @@ run_list(
   #"role[ceilometer-collector]",
   #"role[ceilometer-central-agent]"
 )
+
