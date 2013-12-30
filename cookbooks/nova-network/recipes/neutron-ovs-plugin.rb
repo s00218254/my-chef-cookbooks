@@ -20,7 +20,7 @@ include_recipe "nova-network::neutron-common"
 
 platform_options = node["neutron"]["platform"]
 plugin = node["neutron"]["plugin"]
-
+plugin = "ovs"
 
 platform_options["neutron_#{plugin}_packages"].each do |pkg|
   package pkg do
