@@ -25,7 +25,8 @@ enable_metadata_network = <%= @neutron_metadata_network %>
 dnsmasq_lease_max = <%= @dnsmasq_lease %>
 
 
-<% if @neutron_plugin == "ovs" %>
+#<% if @neutron_plugin == "ovs" %>
 ##### OVS PLUGIN #####
+#interface_driver = neutron.agent.linux.interface.OVSInterfaceDriver
+#<% end %>
 interface_driver = neutron.agent.linux.interface.OVSInterfaceDriver
-<% end %>

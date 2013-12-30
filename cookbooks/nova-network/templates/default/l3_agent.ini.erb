@@ -1,10 +1,11 @@
 [DEFAULT]
-external_network_bridge = <%= @neutron_external_bridge %>
+#external_network_bridge = <%= @neutron_external_bridge %>
 
 metadata_ip = <%= @nova_metadata_ip %>
 metadata_port = 8775
+interface_driver = neutron.agent.linux.interface.OVSInterfaceDriver
 
 <% if @neutron_plugin == "ovs" %>
 # OVS
-interface_driver = neutron.agent.linux.interface.OVSInterfaceDriver
+#interface_driver = neutron.agent.linux.interface.OVSInterfaceDriver
 <% end %>
