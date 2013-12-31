@@ -151,9 +151,9 @@ when "fedora", "redhat", "centos"
   # Array of all the provider based networks to create
   default["neutron"]["ovs"]["provider_networks"] = [
     {
-      "label" => "ph-em2",
-      "bridge" => "br-em2",
-      "vlans" => "1:1000"
+      "label" => "physnet",
+      "bridge" => "br-#{node["neutron"]["ovs"]["data_interface"]}",
+      "vlans" => "#{node["neutron"]["ovs"]["vlan_ranges"]}"
     }
   ]
   default["nova-network"]["platform"] = {
@@ -197,9 +197,9 @@ when "ubuntu"
   # Array of all the provider based networks to create
   default["neutron"]["ovs"]["provider_networks"] = [
     {
-      "label" => "ph-eth1",
-      "bridge" => "br-eth1",
-      "vlans" => "1:1000"
+      "label" => "physnet",
+      "bridge" => "br-#{node["neutron"]["ovs"]["data_interface"]}",
+      "vlans" => "#{node["neutron"]["ovs"]["vlan_ranges"]}"
     }
   ]
 

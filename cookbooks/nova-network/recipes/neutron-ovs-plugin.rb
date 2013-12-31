@@ -51,7 +51,7 @@ end
 
 node["neutron"]["ovs"]["provider_networks"].each do |network|
   execute "create provider bridge #{network['bridge']}" do
-    command "ovs-vsctl add-br #{network['bridge']}"
+    command "ovs-vsctl add-br #{network['bridge']} ;ovs-vsctl add-port #{network['bridge']}  #{node["neutron"]["ovs"]["data_interface"]}"
     action :run
     notifies :restart, "service[neutron-plugin-openvswitch-agent]", :delayed
     not_if "ovs-vsctl list-br | grep #{network['bridge']}" ## FIXME

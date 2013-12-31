@@ -4,8 +4,8 @@
 metadata_ip = <%= @nova_metadata_ip %>
 metadata_port = 8775
 interface_driver = neutron.agent.linux.interface.OVSInterfaceDriver
-
-<% if @neutron_plugin == "ovs" %>
+router_delete_namespaces = True
+#<% if @neutron_plugin == "ovs" %>
 # OVS
 #interface_driver = neutron.agent.linux.interface.OVSInterfaceDriver
-<% end %>
+#<% end %>

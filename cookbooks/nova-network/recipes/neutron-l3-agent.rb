@@ -46,8 +46,9 @@ service "neutron-l3-agent" do
   subscribes :restart, "template[/etc/neutron/l3-agent.ini]", :delayed
 end
 
+
 execute "create external bridge" do
-  command "ovs-vsctl add-br #{node["neutron"]["ovs"]["external_bridge"]}"
+  command "ovs-vsctl add-br #{node["neutron"]["ovs"]["external_bridge"]};ovs-vsctl add-port #{node["neutron"]["ovs"]["external_bridge"]} #{node["neutron"]["ovs"]["external_interface"]}"
   action :run
   not_if "ovs-vsctl show | grep \"Bridge #{node["neutron"]["ovs"]["external_bridge"]}\""
 end
